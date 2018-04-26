@@ -354,16 +354,13 @@
       
         <img src="/2017/03/18/kali_start/kali_start.jpg">
 <a id="more"></a>
-<p><a href="https://www.kali.org/" target="_blank" rel="noopener">Kali</a>和Ubuntu一样都是基于Debian的Linux发行版，kali前身是BackTrack，它集成了许多工具，比如nmap（端口扫描软件）。Wireshark（抓包工具）,该系统主要用于数字取证，渗透测试，黑客攻防。用户可通过硬盘、live CD或live USB运行Kali Linux。Kali Linux既有32位和64位的镜像。可用于x86 指令集。同时还有基于ARM架构的镜像，可用于树莓派和三星的ARMChromebook。由于kali的伟大，因此在安全界有Kali认证证书.</p>
-<h1 id="kali下载"><a href="#kali下载" class="headerlink" title="kali下载"></a>kali下载</h1><p>kali每周日都会更新镜像<br>下载完之后一定要校检HASH值，并比对官方给出的HASH列表。</p>
-<ol>
-<li><a href="http://cdimage.kali.org/kali-images/kali-weekly/" target="_blank" rel="noopener">镜像下载</a><br><img src="kali_start00.png" alt=""></li>
-</ol>
-<h1 id="kali安装"><a href="#kali安装" class="headerlink" title="kali安装"></a>kali安装</h1><p>以下都是基于UEFI启动模式的安装</p>
-<ol>
+<p><a href="https://www.kali.org/" target="_blank" rel="noopener">Kali</a>和Ubuntu一样都是基于Debian的Linux发行版，kali前身是BackTrack，它集成了许多工具，比如nmap（端口扫描软件）。Wireshark（抓包工具）,该系统主要用于数字取证，渗透测试，黑客攻防。用户可通过硬盘、live CD或live USB运行Kali Linux。Kali Linux既有32位和64位的镜像。可用于x86 指令集。同时还有基于ARM架构的镜像，可用于树莓派和三星的ARMChromebook。由于kali的伟大，因此在安全界有Kali认证证书。</p>
+<h1 id="kali安装"><a href="#kali安装" class="headerlink" title="kali安装"></a>kali安装</h1><ol>
+<li><p><a href="https://www.kali.org/downloads/" target="_blank" rel="noopener">镜像下载</a>，下载完之后一定要校检HASH值，并比对官方给出的HASH列表。<br><img src="kali_start00.png" alt=""></p>
+</li>
 <li><p>将U盘格式化为FAT32格式，U盘大小至少8G</p>
 </li>
-<li><p>将下载的ISO文件解压到U盘根目录，即打开U盘就是下图所示（建议先解压到电脑上，然后复制到U盘）<br><img src="kali_start01.png" alt=""></p>
+<li><p>将下载的ISO文件解压到U盘根目录，即打开U盘就是下图所示，建议用Rufus/Win32Disk创建安装盘。<br><img src="kali_start01.png" alt=""></p>
 </li>
 <li><p>进入启动系统性选择</p>
 <ul>
@@ -379,13 +376,13 @@
 </ol>
 <h1 id="kali源设置"><a href="#kali源设置" class="headerlink" title="kali源设置"></a>kali源设置</h1><ol>
 <li><p>kali官方更新源由于在国外，更新速度非常慢，因此为了节省软件更新和安装的时间，把更新源换为国内的，打开/etc/apt/sources.list<br><img src="kali_start20.png" alt=""></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#"#"后面的表示注释</span></span><br><span class="line"><span class="comment">#中科大kali源</span></span><br><span class="line">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line"><span class="comment">#deb http://mirrors.ustc.edu.cn/kali-security/ Kali-rolling/updates main contrib non-free</span></span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/kali-security/ Kali-rolling/updates main contrib non-free</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#中科大Kali源</span></span><br><span class="line">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/kali-security/ Kali-rolling/updates main contrib non-free</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>打开终端执行以下命令来更新</p>
+<li><p>打开终端执行以下命令来更新。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">apt-get update(获取更新)</span><br><span class="line">apt-get upgrade(安装更新)</span><br><span class="line">apt-get dist-upgrade</span><br><span class="line">apt-get install -f(解决依赖问题)</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h1 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h1><h2 id="Chrome安装"><a href="#Chrome安装" class="headerlink" title="Chrome安装"></a>Chrome安装</h2><ol>
+<h1 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h1><h2 id="Chrome"><a href="#Chrome" class="headerlink" title="Chrome"></a>Chrome</h2><ol>
 <li><p>切换到root</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ su root</span><br></pre></td></tr></table></figure>
 </li>
@@ -398,17 +395,17 @@
 <li><p>用gdebi安装Google Chrome</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gdebi google-chrome-stable_current_amd64.deb</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>注意不能以root身份运行chrome浏览器</p>
+<li><p>出于安全原因，不能以root身份运行Chrome浏览器，需要创建一个新用户去使用，也可以在快捷方式上添加–no-sandbox。</p>
 </li>
 </ol>
-<h2 id="中文输入法"><a href="#中文输入法" class="headerlink" title="中文输入法"></a>中文输入法</h2><ol>
+<h2 id="输入法"><a href="#输入法" class="headerlink" title="输入法"></a>输入法</h2><ol>
 <li><p>谷歌拼音</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install fcitx-googlepinyin</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>如果没有输入法则需要到fcitx配置中的输入方法（input methond）选项中（左下角有一个” + “），搜索并添加 google pinyn。</p>
 </li>
 </ol>
-<h2 id="haroopad"><a href="#haroopad" class="headerlink" title="haroopad"></a>haroopad</h2><ol>
+<h2 id="Haroopad"><a href="#Haroopad" class="headerlink" title="Haroopad"></a>Haroopad</h2><ol>
 <li><p>到官网下载deb包<br><a href="http://pad.haroopress.com/user.html" target="_blank" rel="noopener">下载地址</a></p>
 </li>
 <li><p>dpkg -i 包名</p>
@@ -423,7 +420,7 @@
 </li>
 </ol>
 <h1 id="安装问题解答"><a href="#安装问题解答" class="headerlink" title="安装问题解答"></a>安装问题解答</h1><ol>
-<li><p>如果启动后进入GRUB命令行界面，说明没有grub.cfg，此时可以通过命令行进入系统</p>
+<li><p>如果启动后进入GRUB命令行界面，说明grub.cfg丢失或损坏，此时可以通过命令行进入系统</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">grub&gt;ls  //查看分区</span><br><span class="line">(hd0,gpt1) (hd0,gpt2) (hd0,gpt3)</span><br><span class="line">grub&gt;<span class="built_in">set</span> root=(hd0,gpt3) //我的系统分区是(hd0,gpt3)</span><br><span class="line">grub&gt;linux /boot/vmlinuz* ro root=/dev/sda3</span><br><span class="line">//我的根目录分区是sda3,*表示内核型号，建议输入/boot/vmlinuz之后按tab键自动补全</span><br><span class="line">grub&gt;initrd /initrd.img</span><br><span class="line">grub&gt;boot</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>进入系统后打开终端，执行</p>
@@ -453,8 +450,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/18/hexo_start/" rel="next" title="hexo环境的搭建">
-                <i class="fa fa-chevron-left"></i> hexo环境的搭建
+              <a href="/2017/03/18/hexo_start/" rel="next" title="Hexo环境的搭建">
+                <i class="fa fa-chevron-left"></i> Hexo环境的搭建
               </a>
             
           </div>
@@ -557,7 +554,7 @@
                 
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -568,7 +565,7 @@
                 
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -601,7 +598,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#kali下载"><span class="nav-number">1.</span> <span class="nav-text">kali下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#kali安装"><span class="nav-number">2.</span> <span class="nav-text">kali安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#kali源设置"><span class="nav-number">3.</span> <span class="nav-text">kali源设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软件安装"><span class="nav-number">4.</span> <span class="nav-text">软件安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome安装"><span class="nav-number">4.1.</span> <span class="nav-text">Chrome安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中文输入法"><span class="nav-number">4.2.</span> <span class="nav-text">中文输入法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#haroopad"><span class="nav-number">4.3.</span> <span class="nav-text">haroopad</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VirtualBox"><span class="nav-number">4.4.</span> <span class="nav-text">VirtualBox</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装问题解答"><span class="nav-number">5.</span> <span class="nav-text">安装问题解答</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#kali安装"><span class="nav-number">1.</span> <span class="nav-text">kali安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#kali源设置"><span class="nav-number">2.</span> <span class="nav-text">kali源设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软件安装"><span class="nav-number">3.</span> <span class="nav-text">软件安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome"><span class="nav-number">3.1.</span> <span class="nav-text">Chrome</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入法"><span class="nav-number">3.2.</span> <span class="nav-text">输入法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Haroopad"><span class="nav-number">3.3.</span> <span class="nav-text">Haroopad</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VirtualBox"><span class="nav-number">3.4.</span> <span class="nav-text">VirtualBox</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装问题解答"><span class="nav-number">4.</span> <span class="nav-text">安装问题解答</span></a></li></ol></div>
             
 
           </div>
