@@ -357,10 +357,10 @@
 <p>Kali默认安装的是开源项目nouveau为nvidia开发的开源驱动，但似乎在我的电脑上表现不怎么样，所以我开始折腾安装官方的闭源驱动。</p>
 <h1 id="更新内核"><a href="#更新内核" class="headerlink" title="更新内核"></a>更新内核</h1><ol>
 <li><p>更新</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get upgrade</span><br><span class="line">apt-get dist-upgrade</span><br><span class="line">apt-get install linux-headers-$(uname -r)</span><br><span class="line">//提示是最新版，就可以了,一定要更新到最新内核，否则会出现很多未知错误。</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get upgrade</span><br><span class="line">apt-get dist-upgrade</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>检验是否最新</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">uname -r</span><br><span class="line">//4.15.0-kali2-amd64</span><br><span class="line">apt-cache search linux-headers</span><br><span class="line">//若输出结果中有和上一条命令输出结果相同的版本，则更新成功。</span><br></pre></td></tr></table></figure>
+<li><p>安装内核头，搜索结果中的4.15.0是内核版本，amd64表示64位。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//搜索最新的内核头</span><br><span class="line">apt-cache search linux-headers</span><br><span class="line">//找到类似linux-headers-4.15.0-kali2-amd64</span><br><span class="line">apt-get install linux-headers-4.15.0-kali2-amd64</span><br><span class="line">apt-cache search linux-images</span><br><span class="line">//找到类似linux-images-4.15.0-kali2-amd64</span><br><span class="line">apt-get install linux-images-4.15.0-kali2-amd64</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h1 id="关闭nouveau"><a href="#关闭nouveau" class="headerlink" title="关闭nouveau"></a>关闭nouveau</h1><ol>
@@ -373,10 +373,10 @@
 </ol>
 <h1 id="安装NVIDIA驱动"><a href="#安装NVIDIA驱动" class="headerlink" title="安装NVIDIA驱动"></a>安装NVIDIA驱动</h1><ol>
 <li><p>查看显卡型号。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lspci | grep -E <span class="string">"VGA|3D"</span></span><br><span class="line">//输出类似下面的，主要参数GM108M [GeForce 930M]，下一步下载驱动需要用到。01:00.0为BusID，规格化为PCI:1:0:0</span><br><span class="line">00:02.0 VGA compatible controller: Intel Corporation HD Graphics 520 (rev 07)</span><br><span class="line">01:00.0 3D controller: NVIDIA Corporation GM108M [GeForce 930M] (rev a2)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lspci | grep -E <span class="string">"VGA|3D"</span></span><br><span class="line">//输出类似下面的，主要参数[GeForce 930M]，下一步下载驱动需要用到。</span><br><span class="line">00:02.0 VGA compatible controller: Intel Corporation HD Graphics 520 (rev 07)</span><br><span class="line">01:00.0 3D controller: NVIDIA Corporation GM108M [GeForce 930M] (rev a2)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>去官网下载相应驱动，安装之后先不要重启，否则之后进不去桌面，只能在命令行下配置一个一个敲，很痛苦。<a href="http://www.nvidia.com/Download/index.aspx" target="_blank" rel="noopener">下载地址</a>。<br><img src="01.png" alt="01"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod a+x nvidia.deb</span><br><span class="line">dpkg -i nvidia.deb</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod a+x nvidia.run</span><br><span class="line">./nvidia.deb</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>文件配置<br>查看BusID，在接下来的配置文件中要用到。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvidia-xconfig --query-gpu-info | grep <span class="string">'BusID :'</span> | cut -d <span class="string">' '</span> -f6</span><br><span class="line">//输出PCI:1:0:0</span><br></pre></td></tr></table></figure>
@@ -385,7 +385,7 @@
 </li>
 <li><p>在<strong>/usr/share/gdm/greeter/autostart/optimus.desktop</strong>中添加下列代码</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Type = Application</span><br><span class="line">Name = Optimus</span><br><span class="line">Exec = sh -c <span class="string">"xrandr --setprovideroutputsource modesetting NVIDIA-0; xrandr --auto"</span></span><br><span class="line">NoDisplay = <span class="literal">true</span></span><br><span class="line">X-GNOME-Autostart-Phase=DisplayServer</span><br></pre></td></tr></table></figure>
-<p> 在<strong>/usr/share/gdm/greeter/autostart/optimus.desktop</strong>中添加下列代码。</p>
+<p> 在<strong>etc/xdg/autostart/optimus.desktop</strong>中添加下列代码。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Type = Application</span><br><span class="line">Name = Optimus</span><br><span class="line">Exec = sh -c <span class="string">"xrandr --setprovideroutputsource modesetting NVIDIA-0; xrandr --auto"</span></span><br><span class="line">NoDisplay = <span class="literal">true</span></span><br><span class="line">X-GNOME-Autostart-Phase=DisplayServer</span><br></pre></td></tr></table></figure>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
 </li>
@@ -426,6 +426,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/28/kali02/" rel="prev" title="Kali美化">
+                Kali美化 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -506,7 +510,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -528,7 +532,7 @@
                 
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

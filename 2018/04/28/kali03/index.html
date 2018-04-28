@@ -120,7 +120,7 @@
 
 
 
-  <title>标签 | Orangice</title>
+  <title>Kali创建应用快捷方式 | Orangice</title>
   
 
 
@@ -251,40 +251,192 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/28/kali03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="orangice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Orangice">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline"></h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                目前共计 4 个标签
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/Kali/" style="font-size: 12px; color: #ccc">Kali</a> <a href="/tags/Linux/" style="font-size: 12px; color: #ccc">Linux</a> <a href="/tags/hexo/" style="font-size: 12px; color: #ccc">hexo</a> <a href="/tags/编辑器/" style="font-size: 12px; color: #ccc">编辑器</a>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">Kali创建应用快捷方式</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-28T10:48:10+08:00">2018-04-28</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kali/" itemprop="url" rel="index">
+                    <span itemprop="name">Kali</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <img src="/2018/04/28/kali03/00.png">
+<a id="more"></a>
+<p>有些软件在Linux下解压后直接就能使用,尤其是jetbrains的产品，每次都要到对应的程序目录下执行启动程序。虽然可以通过创建软链接或者将启动脚本的路径加入环境变量达到在命令行下启动，可比起从桌面直接点击图标启动还是有点不便。</p>
+<h1 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h1><ol>
+<li><p>快捷方式是以.desktop为后缀的文件，只要在其中添加一些代码，就能赋予他启动软件的能力。<br> 代码格式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Encoding=UTF-8</span><br><span class="line">Type=Application</span><br><span class="line">Comment=The Javascript IDE <span class="keyword">for</span> Professional Developers by JetBrains</span><br><span class="line">Name=Webstorm</span><br><span class="line">GenericName=Webstorm IDEA</span><br><span class="line">Exec=/home/orangice/Application/WebStorm/bin/webstorm.sh</span><br><span class="line">Icon=/home/orangice/Application/WebStorm/bin/webstorm.png</span><br><span class="line">Terminal=<span class="literal">false</span></span><br><span class="line">Categories=Application;Programme;</span><br></pre></td></tr></table></figure>
+<p> <img src="01.png" alt=""><br> 参数解析</p>
+<ul>
+<li>Type：要启动的文件类型，值为Application表示程序文件，值为Link表示链接文件。</li>
+<li>Comment：注释。</li>
+<li>Name：快捷方式的名称。</li>
+<li>Exec：应用程序的绝对路径。</li>
+<li>Icon：快捷方式图标的绝对路径。</li>
+<li>Terminal：是否在终端启动，true表示在，false表示不在，只能在终端执行的必须为true。</li>
+</ul>
+</li>
+</ol>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><ol>
+<li><p>在<strong>/usr/share/applications</strong>目录下创建.desktop后缀的文件，文件名是你的应用名。以创建Webstorm快捷方式为例。编辑Webstorm.desktop。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/share/applications/Webstorm.desktop</span><br></pre></td></tr></table></figure>
+<p> 添加如下代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Encoding=UTF-8</span><br><span class="line">Type=Application</span><br><span class="line">Name=Webstorm</span><br><span class="line">Comment=The Javascript IDE <span class="keyword">for</span> Professional Developers by JetBrains</span><br><span class="line">Exec=/home/orangice/Application/WebStorm/bin/webstorm.sh</span><br><span class="line">Icon=/home/orangice/Application/WebStorm/bin/webstorm.png</span><br><span class="line">Terminal=<span class="literal">false</span></span><br><span class="line">Categories=Application;Development;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a+x /usr/share/applications/Webstorm.desktop</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/Kali/" rel="tag"># Kali</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/28/kali02/" rel="next" title="Kali美化">
+                <i class="fa fa-chevron-left"></i> Kali美化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -317,8 +469,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -382,6 +543,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件格式"><span class="nav-number">1.</span> <span class="nav-text">文件格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实例"><span class="nav-number">2.</span> <span class="nav-text">实例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
